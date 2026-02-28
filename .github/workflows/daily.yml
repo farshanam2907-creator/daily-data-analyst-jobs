@@ -18,18 +18,13 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Create virtual environment
-        run: python -m venv venv
-
-      - name: Activate virtual environment & install requests
+      - name: Install dependencies
         run: |
-          source venv/bin/activate
-          pip install requests
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run script
-        run: |
-          source venv/bin/activate
-          python job_scraper.py
+        run: python job_scraper.py
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
-          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}  
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
